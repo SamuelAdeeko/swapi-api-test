@@ -1,10 +1,11 @@
 package com.swapi.test;
 
 import static io.restassured.RestAssured.given;
-
 import io.restassured.RestAssured;
 
 public class TestBase {
+	
+	
 	
 	
 	public static String base() {

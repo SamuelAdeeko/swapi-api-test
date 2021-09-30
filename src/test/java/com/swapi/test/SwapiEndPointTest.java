@@ -14,7 +14,6 @@ public class SwapiEndPointTest {
 
 	@Test
 	public void endPointValidation() {
-		
 	
 	// validate if add booking API works as expected
 	RestAssured.baseURI = "https://swapi.dev/api";

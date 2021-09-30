@@ -3,11 +3,11 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.swapi.test.IndividualTest">
+      <class name="com.swapi.test.SwapiEndPointTest">
         <methods>
-          <include name="verifyIndividual"/>
+          <include name="endPointValidation"/>
         </methods>
-      </class> <!-- com.swapi.test.IndividualTest -->
+      </class> <!-- com.swapi.test.SwapiEndPointTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
