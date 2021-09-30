@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name = "suite">
+	<test thread-count = "4" name = "swapi-api-test">
+		<classes>
+		 	<class name = "com.swapi.test.SwapiEndPointTest" /> 
+		 	<class name = "com.swapi.test.PeopleHeightTest" />
+		 	<class name = "com.swapi.test.IndividualTest" />
+		 	<class name = "com.swapi.test.PeopleTotalTest" />
+		</classes>
+	</test>
+</suite>
