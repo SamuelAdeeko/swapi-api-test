@@ -17,7 +17,7 @@ public class TestBase {
 	.then().log().all().assertThat()
 	.statusCode(200)
 	.extract().response().asString();
-	//System.out.println("Response === " + response);
+
 	
 	return response;
 	}

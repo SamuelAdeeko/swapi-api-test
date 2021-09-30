@@ -2,12 +2,15 @@ package com.swapi.test;
 
 import static io.restassured.RestAssured.given;
 
+import org.apache.log4j.Logger;
 import org.testng.annotations.Test;
 
 import io.restassured.RestAssured;
 
 public class SwapiEndPointTest {
 
+	
+	private Logger log = Logger.getLogger(SwapiEndPointTest.class);
 
 	@Test
 	public void endPointValidation() {
@@ -17,11 +20,12 @@ public class SwapiEndPointTest {
 	RestAssured.baseURI = "https://swapi.dev/api";
 	
 	
-	given().log().all().get("/people")
+	String response = given().log().all().get("/people")
 	.then().log().all().assertThat()
 	.statusCode(200)
 	.extract().response().asString();
 	
+	log.info("Response " + response);
 	}
 
 }
