@@ -102,7 +102,7 @@
                     <div class="method-list-content failed suite-suite">
                       <span>
                         <img width="3%" src="failed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-suite" title="com.swapi.test.IndividualTest" hash-for-method="verifyIndividual">verifyIndividual</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-suite" title="com.swapi.test.IndividualTest" hash-for-method="verifyPeopleHeightMoreThan200NameMatches">verifyPeopleHeightMoreThan200NameMatches</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content failed suite-suite -->
@@ -149,32 +149,17 @@
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="verifyIndividual">
-                  </a> <!-- verifyIndividual -->
-                  <span class="method-name">verifyIndividual</span>
-                  <div class="stack-trace">java.lang.AssertionError: Lists differ at element [6]: Tuan Wu != Taun We expected [Tuan Wu] but found [Taun We]
-	at com.swapi.test.IndividualTest.verifyIndividual(IndividualTest.java:124)
-... Removed 30 stack frames
+                  <a name="verifyPeopleHeightMoreThan200NameMatches">
+                  </a> <!-- verifyPeopleHeightMoreThan200NameMatches -->
+                  <span class="method-name">verifyPeopleHeightMoreThan200NameMatches</span>
+                  <div class="stack-trace">java.lang.AssertionError: expected [Tuan Wu] but found [Taun We]
+	at com.swapi.test.IndividualTest.verifyPeopleHeightMoreThan200NameMatches(IndividualTest.java:149)
+... Removed 31 stack frames
 </div> <!-- stack-trace -->
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
           </div> <!-- suite-suite-class-failed -->
-          <div class="suite-suite-class-passed">
-            <div class="main-panel-header rounded-window-top">
-              <img src="passed.png"/>
-              <span class="class-name">com.swapi.test.PeopleTotalTest</span>
-            </div> <!-- main-panel-header rounded-window-top -->
-            <div class="main-panel-content rounded-window-bottom">
-              <div class="method">
-                <div class="method-content">
-                  <a name="findTotalPeople">
-                  </a> <!-- findTotalPeople -->
-                  <span class="method-name">findTotalPeople</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-            </div> <!-- main-panel-content rounded-window-bottom -->
-          </div> <!-- suite-suite-class-passed -->
           <div class="suite-suite-class-passed">
             <div class="main-panel-header rounded-window-top">
               <img src="passed.png"/>
@@ -186,6 +171,21 @@
                   <a name="verifyHeight">
                   </a> <!-- verifyHeight -->
                   <span class="method-name">verifyHeight</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-suite-class-passed -->
+          <div class="suite-suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.swapi.test.PeopleTotalTest</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="findTotalPeople">
+                  </a> <!-- findTotalPeople -->
+                  <span class="method-name">findTotalPeople</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -264,24 +264,24 @@ data.addRows(4);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'verifyHeight')
 data.setCell(0, 2, 'com.swapi.test.PeopleHeightTest')
-data.setCell(0, 3, 14655);
+data.setCell(0, 3, 28882);
 data.setCell(1, 0, 1)
-data.setCell(1, 1, 'verifyIndividual')
+data.setCell(1, 1, 'verifyPeopleHeightMoreThan200NameMatches')
 data.setCell(1, 2, 'com.swapi.test.IndividualTest')
-data.setCell(1, 3, 13327);
+data.setCell(1, 3, 22423);
 data.setCell(2, 0, 2)
 data.setCell(2, 1, 'findTotalPeople')
 data.setCell(2, 2, 'com.swapi.test.PeopleTotalTest')
-data.setCell(2, 3, 10558);
+data.setCell(2, 3, 18060);
 data.setCell(3, 0, 3)
 data.setCell(3, 1, 'endPointValidation')
 data.setCell(3, 2, 'com.swapi.test.SwapiEndPointTest')
-data.setCell(3, 3, 1533);
+data.setCell(3, 3, 1345);
 window.suiteTableData['suite']= { tableData: data, tableDiv: 'times-div-suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 40 seconds</span>
+              <span class="suite-total-time">Total running time: 1 minutes</span>
               <div id="times-div-suite">
               </div> <!-- times-div-suite -->
             </div> <!-- times-div -->
@@ -317,7 +317,7 @@ return data;
               <div class="chronological-class-name">com.swapi.test.PeopleHeightTest</div> <!-- chronological-class-name -->
               <div class="test-method">
                 <span class="method-name">verifyHeight</span>
-                <span class="method-start">1538 ms</span>
+                <span class="method-start">1349 ms</span>
               </div> <!-- test-method -->
             </div> <!-- chronological-class -->
             <div class="chronological-class">
@@ -325,15 +325,15 @@ return data;
               <div class="test-method">
                 <img src="failed.png">
                 </img>
-                <span class="method-name">verifyIndividual</span>
-                <span class="method-start">16195 ms</span>
+                <span class="method-name">verifyPeopleHeightMoreThan200NameMatches</span>
+                <span class="method-start">30244 ms</span>
               </div> <!-- test-method -->
             </div> <!-- chronological-class -->
             <div class="chronological-class">
               <div class="chronological-class-name">com.swapi.test.PeopleTotalTest</div> <!-- chronological-class-name -->
               <div class="test-method">
                 <span class="method-name">findTotalPeople</span>
-                <span class="method-start">29526 ms</span>
+                <span class="method-start">52674 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
