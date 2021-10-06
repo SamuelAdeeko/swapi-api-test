@@ -2,7 +2,7 @@ package com.swapi.test;
 
 import static io.restassured.RestAssured.given;
 import static org.testng.Assert.assertEquals;
-
+import java.io.IOException;
 import org.testng.annotations.Test;
 import org.testng.log4testng.Logger;
 import com.swapi.ReuseAbleMethod;
@@ -16,7 +16,7 @@ public class PeopleTotalTest extends TestBase {
 
 	@Test
 
-	public void findTotalPeople() {
+	public void findTotalPeople() throws IOException {
 
 		/*
 		 * Data will be written and read from an excel sheet I created two column to
@@ -24,14 +24,21 @@ public class PeopleTotalTest extends TestBase {
 		 */
 		XlsReader reader = new XlsReader(System.getProperty("user.dir") + "//src//main//resources//Book2.xlsx");
 
-		// Global variables and String objects
+		// Excel sheet columns and sheet name
 		String sheetName = "sheet1";
 		String column1 = "Name";
 		String column2 = "Height";
 
+		// variables and String objects
 		String path = null;
 		String name = "";
 		int height = 0;
+
+		// get the value of the property using its key 'resource'
+		String resource = properties.getProperty("resource");
+
+		// get the value of the property using its key 'paramName'
+		String paramName = properties.getProperty("paramName");
 
 		JsonPath js = ReuseAbleMethod.rawToJson(response); // convert response string to get the json path
 		int resultSize = js.get("results.size()"); // get the size of results object
@@ -45,7 +52,6 @@ public class PeopleTotalTest extends TestBase {
 			reader.setCellData(sheetName, column1, count, name);
 			// use try catch block to catch NumberFormatException
 			try {
-				log.info("Count == " + count);
 				height = js.getInt("results[" + i + "].height"); // get all the heights
 				reader.setCellData(sheetName, column2, count, height);
 			} catch (NumberFormatException e) {
@@ -71,8 +77,8 @@ public class PeopleTotalTest extends TestBase {
 			 * when, then get response as string
 			 */
 
-			String res1 = given().log().all().queryParam("page", pageN).when().get("people").then().log().all()
-					.assertThat().statusCode(200).extract().response().asString();
+			String res1 = given().queryParam(paramName, pageN).when().get(resource).then().assertThat().statusCode(200)
+					.extract().response().asString();
 
 			JsonPath js1 = ReuseAbleMethod.rawToJson(res1);
 			int resultSize1 = js1.getInt("results.size()"); // get the results size

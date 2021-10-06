@@ -2,6 +2,9 @@ package com.swapi.test;
 
 import static io.restassured.RestAssured.given;
 import static org.testng.Assert.assertEquals;
+
+import java.io.IOException;
+
 import org.testng.annotations.Test;
 import org.testng.log4testng.Logger;
 import com.swapi.ReuseAbleMethod;
@@ -11,11 +14,11 @@ import io.restassured.path.json.JsonPath;
 
 public class PeopleHeightTest extends TestBase {
 
-	String response = TestBase.base();
 	private static Logger log = Logger.getLogger(PeopleHeightTest.class);
+	String response = TestBase.base();
 
 	@Test
-	public void verifyHeight() {
+	public void verifyHeight() throws IOException {
 
 		/*
 		 * Data will be written and read from an excel sheet I created two column to
@@ -23,14 +26,21 @@ public class PeopleHeightTest extends TestBase {
 		 */
 		XlsReader reader = new XlsReader(System.getProperty("user.dir") + "//src//main//resources//Book2.xlsx");
 
-		// Global variables and String objects
+		// Excel sheet columns and sheet name
 		String sheetName = "sheet1";
 		String column1 = "Name";
 		String column2 = "Height";
 
+		// variables and String objects
 		String path = null;
 		String name = "";
 		int height = 0;
+
+		// get the value of the property using its key 'resource'
+		String resource = properties.getProperty("resource");
+
+		// get the value of the property using its key 'paramName'
+		String paramName = properties.getProperty("paramName");
 
 		JsonPath js = ReuseAbleMethod.rawToJson(response); // convert response string to get the json path
 		int resultSize = js.get("results.size()"); // get the size of results object
@@ -70,8 +80,8 @@ public class PeopleHeightTest extends TestBase {
 			 * when, then get response as string
 			 */
 
-			String res1 = given().log().all().queryParam("page", pageN).when().get("people").then().log().all()
-					.assertThat().statusCode(200).extract().response().asString();
+			String res1 = given().queryParam(paramName, pageN).when().get(resource).then().assertThat().statusCode(200)
+					.extract().response().asString();
 
 			JsonPath js1 = ReuseAbleMethod.rawToJson(res1);
 			int resultSize1 = js1.getInt("results.size()"); // get the results size
@@ -103,8 +113,9 @@ public class PeopleHeightTest extends TestBase {
 			String heightNum = reader.getCellData(sheetName, column2, num);
 
 			try {
-				Double allHeight = Double.parseDouble(heightNum);
-				if (allHeight > 200) {
+				double allHeight = Double.parseDouble(heightNum);
+				int allHeight1 = (int) allHeight; // cast double to int
+				if (allHeight1 > 200) {
 					counter = counter + 1;
 				}
 			} catch (NumberFormatException e) {

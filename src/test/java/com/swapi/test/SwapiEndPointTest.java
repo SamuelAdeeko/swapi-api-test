@@ -1,26 +1,36 @@
 package com.swapi.test;
 
 import static io.restassured.RestAssured.given;
-
-import org.apache.log4j.Logger;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 import org.testng.annotations.Test;
-
 import io.restassured.RestAssured;
 
-public class SwapiEndPointTest {
-
-	private Logger log = Logger.getLogger(SwapiEndPointTest.class);
+public class SwapiEndPointTest extends TestBase {
 
 	@Test
 	public void endPointValidation() {
 
+		Properties properties = new Properties();
+		try {
+			FileInputStream inputStream = new FileInputStream("./src/main/resources/testdata.properties");
+			properties.load(inputStream);
+		} catch (IOException e) {
+			log.info(e);
+		}
+
+		// get the value of the property using its key 'uri'
+		String uri = properties.getProperty("uri");
+
+		// get the value of the property using its key 'resource'
+		String resource = properties.getProperty("resource");
+
+		RestAssured.baseURI = uri;
+
 		// validate if add booking API works as expected
-		RestAssured.baseURI = "https://swapi.dev/api";
+		given().get(resource).then().assertThat().statusCode(200).extract().response().asString();
 
-		String response = given().log().all().get("/people").then().log().all().assertThat().statusCode(200).extract()
-				.response().asString();
-
-		log.info("Response " + response);
 	}
 
 }
