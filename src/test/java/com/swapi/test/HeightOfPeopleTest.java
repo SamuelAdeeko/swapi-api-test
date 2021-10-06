@@ -1,22 +1,24 @@
 package com.swapi.test;
 
 import static io.restassured.RestAssured.given;
-import java.util.ArrayList;
-import java.util.List;
-import org.apache.log4j.Logger;
-import org.testng.Assert;
+import static org.testng.Assert.assertEquals;
+
+import java.io.IOException;
+
 import org.testng.annotations.Test;
+import org.testng.log4testng.Logger;
 import com.swapi.ReuseAbleMethod;
 import com.swapi.util.XlsReader;
+
 import io.restassured.path.json.JsonPath;
 
-public class IndividualTest extends TestBase {
+public class HeightOfPeopleTest extends TestBase {
 
-	private Logger log = Logger.getLogger(IndividualTest.class);
+	private static Logger log = Logger.getLogger(HeightOfPeopleTest.class);
 	String response = TestBase.base();
 
 	@Test
-	public void verifyPeopleHeightMoreThan200NameMatches() {
+	public void findNumberOfPeopleWithHeightGreaterThan200() throws IOException {
 
 		/*
 		 * Data will be written and read from an excel sheet I created two column to
@@ -39,25 +41,6 @@ public class IndividualTest extends TestBase {
 
 		// get the value of the property using its key 'paramName'
 		String paramName = properties.getProperty("paramName");
-
-		List<String> tallPerson = new ArrayList<>(); // An arrayList to store People above 200cm
-
-		/*
-		 * An arrayList containing the expected result of individuals above height 200cm
-		 * This data can be read from an excel sheet as well
-		 */
-
-		List<String> expectedIndividuals = new ArrayList<>();
-		expectedIndividuals.add("Darth Vader");
-		expectedIndividuals.add("Chewbacca");
-		expectedIndividuals.add("Roos Tarpals");
-		expectedIndividuals.add("Rugor Nass");
-		expectedIndividuals.add("Yarael Poof");
-		expectedIndividuals.add("Lama Su");
-		expectedIndividuals.add("Tuan Wu");
-		expectedIndividuals.add("Grievous");
-		expectedIndividuals.add("Tarfful");
-		expectedIndividuals.add("Tion Medon");
 
 		JsonPath js = ReuseAbleMethod.rawToJson(response); // convert response string to get the json path
 		int resultSize = js.get("results.size()"); // get the size of results object
@@ -128,35 +111,22 @@ public class IndividualTest extends TestBase {
 		// get data from excel sheet age column
 		for (int num = 2; num <= count; num++) {
 			String heightNum = reader.getCellData(sheetName, column2, num);
-			log.info("Row number from excel === " + num);
 
 			try {
-				Double allHeight = Double.parseDouble(heightNum);
-				if (allHeight > 200) {
+				double allHeight = Double.parseDouble(heightNum);
+				int allHeight1 = (int) allHeight; // cast double to int
+				if (allHeight1 > 200) {
 					counter = counter + 1;
-					System.out.println("Counter ==== " + counter);
-					log.info("Row number height from excel === " + allHeight);
-					String allName = reader.getCellData(sheetName, column1, num);
-					String actualName = allName;
-					log.info("Namessss === " + actualName);
-					tallPerson.add(actualName);
 				}
 			} catch (NumberFormatException e) {
 				log.info(e);
 			}
 
 		}
-		// verify name matches for names with height 200cm and above
-		Assert.assertEquals(tallPerson.get(0), expectedIndividuals.get(0));
-		Assert.assertEquals(tallPerson.get(1), expectedIndividuals.get(1));
-		Assert.assertEquals(tallPerson.get(2), expectedIndividuals.get(2));
-		Assert.assertEquals(tallPerson.get(3), expectedIndividuals.get(3));
-		Assert.assertEquals(tallPerson.get(4), expectedIndividuals.get(4));
-		Assert.assertEquals(tallPerson.get(5), expectedIndividuals.get(5));
-		Assert.assertEquals(tallPerson.get(6), expectedIndividuals.get(6));
-		Assert.assertEquals(tallPerson.get(7), expectedIndividuals.get(7));
-		Assert.assertEquals(tallPerson.get(8), expectedIndividuals.get(8));
-		Assert.assertEquals(tallPerson.get(9), expectedIndividuals.get(9));
+		// check if actual number is equal expected number
+		int expectedNumber = 10;
+		int actualNumber = counter;
+		assertEquals(actualNumber, expectedNumber);
 
 	}
 }

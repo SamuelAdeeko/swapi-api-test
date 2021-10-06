@@ -2,23 +2,21 @@ package com.swapi.test;
 
 import static io.restassured.RestAssured.given;
 import static org.testng.Assert.assertEquals;
-
 import java.io.IOException;
-
 import org.testng.annotations.Test;
 import org.testng.log4testng.Logger;
 import com.swapi.ReuseAbleMethod;
 import com.swapi.util.XlsReader;
-
 import io.restassured.path.json.JsonPath;
 
-public class PeopleHeightTest extends TestBase {
+public class TotalNumberOfPeopleTest extends TestBase {
 
-	private static Logger log = Logger.getLogger(PeopleHeightTest.class);
 	String response = TestBase.base();
+	private static Logger log = Logger.getLogger(TotalNumberOfPeopleTest.class);
 
 	@Test
-	public void verifyHeight() throws IOException {
+
+	public void findTotalNumberOfPeople() throws IOException {
 
 		/*
 		 * Data will be written and read from an excel sheet I created two column to
@@ -54,7 +52,6 @@ public class PeopleHeightTest extends TestBase {
 			reader.setCellData(sheetName, column1, count, name);
 			// use try catch block to catch NumberFormatException
 			try {
-				log.info("Count == " + count);
 				height = js.getInt("results[" + i + "].height"); // get all the heights
 				reader.setCellData(sheetName, column2, count, height);
 			} catch (NumberFormatException e) {
@@ -90,43 +87,24 @@ public class PeopleHeightTest extends TestBase {
 
 			for (int i = 0; i < resultSize1; i++) {
 				count = count + 1;
-				log.info("Count == " + count);
 
 				name = js1.getString("results[" + i + "].name"); // get the name from the results object
 				reader.setCellData(sheetName, column1, count, name);
 				// use try catch block to catch NumberFormatException
 				try {
-					log.info("Count ==== " + count);
 					height = js1.getInt("results[" + i + "].height"); // get the height
 					reader.setCellData(sheetName, column2, count, height);
 				} catch (NumberFormatException e) {
-					e.printStackTrace();
+					log.info(e);
 				}
 
 			}
 
 		}
-
-		int counter = 0;
-		// get data from excel sheet age column
-		for (int num = 2; num <= count; num++) {
-			String heightNum = reader.getCellData(sheetName, column2, num);
-
-			try {
-				double allHeight = Double.parseDouble(heightNum);
-				int allHeight1 = (int) allHeight; // cast double to int
-				if (allHeight1 > 200) {
-					counter = counter + 1;
-				}
-			} catch (NumberFormatException e) {
-				log.info(e);
-			}
-
-		}
-		// check if actual number is equal expected number
-		int expectedNumber = 10;
-		int actualNumber = counter;
-		assertEquals(actualNumber, expectedNumber);
+		// subtract 1 from count because we assigned it a value of 1
+		int actualCount = count - 1;
+		int expectedNumber = 82; // expected number
+		assertEquals(actualCount, expectedNumber); // verify that the totalNumber and expectedNumber are equal
 
 	}
 }

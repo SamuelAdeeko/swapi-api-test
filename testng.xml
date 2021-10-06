@@ -4,9 +4,9 @@
 	<test thread-count = "4" name = "swapi-api-test">
 		<classes>
 		     <class name = "com.swapi.test.SwapiEndPointTest" /> 
-		  	<class name = "com.swapi.test.PeopleHeightTest" /> 
-		  	<class name = "com.swapi.test.IndividualTest" /> 
-		 	<class name = "com.swapi.test.PeopleTotalTest" /> 
+		  	<class name = "com.swapi.test.TotalNumberOfPeopleTest" /> 
+		  	<class name = "com.swapi.test.IndividualHeightTest" /> 
+		 	<class name = "com.swapi.test.HeightOfPeopleTest" /> 
 		</classes>
 	</test>
 </suite>
